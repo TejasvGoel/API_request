@@ -1,8 +1,11 @@
 <?php
 $con = mysqli_connect("localhost","root","","API_Data");
 $response = array();
+$url = $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+$url = explode("/", $url);
+$id = $url[count($url) - 1];
 if($con){
-    $sql = "select * from reqdata";
+    $sql = "select * from reqdata where id ='$id' ";
     $result = mysqli_query($con, $sql);
     if($result){
         header("Content-Type: JSON");
